@@ -1,6 +1,7 @@
 ﻿#include "GameController.h"
 
-#include "../../build/external/raylib-master/src/raylib.h"
+#include "build/external/raylib-master/src/raylib.h"
+
 
 void GameController::Run()
 {
