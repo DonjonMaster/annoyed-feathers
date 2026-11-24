@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include "EntityId.h"
-#include "SiegeLabCore/Gameplay/Game/GameEntity.h"
-
-#include <memory>
 #include <vector>
+
+#include "EntityId.h"
+#include "ObjectPool.h"
+#include "SiegeLabCore/Gameplay/Game/GameEntity.h"
 
 class SceneObjects
 {
@@ -14,5 +14,12 @@ public:
   void FlushRemovals();
   
 private:
-  std::vector<std::unique_ptr<GameEntity*>> entities_;
+  ObjectPool<GameEntity*, 32> pool_;
 };
+
+template <typename T>
+EntityId SceneObjects::CreateEntity()
+{
+  pool_.Create<T>();
+}
+

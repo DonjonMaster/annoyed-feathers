@@ -215,6 +215,7 @@
     <ClInclude Include="Gameplay\Launcher\TrajectoryPredictor.h" />
     <ClInclude Include="Gameplay\Scene\EntityId.h" />
     <ClInclude Include="Gameplay\Scene\ObjectPool.h" />
+    <ClInclude Include="Gameplay\Scene\ObjectPool.inl" />
     <ClInclude Include="Gameplay\Scene\SceneObjects.h" />
     <ClInclude Include="Gameplay\Scene\SceneRenderer.h" />
     <ClInclude Include="PhysicsWorld\CollisionEvents\CollisionEvent.h"/>
