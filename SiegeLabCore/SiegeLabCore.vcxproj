@@ -213,6 +213,7 @@
     <ClInclude Include="Gameplay\Launcher\Launcher.h" />
     <ClInclude Include="Gameplay\Launcher\ShotSettings.h" />
     <ClInclude Include="Gameplay\Launcher\TrajectoryPredictor.h" />
+    <ClInclude Include="Gameplay\Scene\EntityId.h" />
     <ClInclude Include="Gameplay\Scene\ObjectPool.h" />
     <ClInclude Include="Gameplay\Scene\SceneObjects.h" />
     <ClInclude Include="Gameplay\Scene\SceneRenderer.h" />
