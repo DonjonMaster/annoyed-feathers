@@ -165,6 +165,13 @@
     <ClCompile Include="Gameplay\Input\InputController.cpp" />
     <ClCompile Include="Gameplay\Launcher\Launcher.cpp" />
     <ClCompile Include="Gameplay\Launcher\TrajectoryPredictor.cpp" />
+    <ClCompile Include="PhysicsWorld\CollisionEvents\CollisionEvent.cpp" />
+    <ClCompile Include="PhysicsWorld\CollisionEvents\CollisionEventDispatcher.cpp" />
+    <ClCompile Include="PhysicsWorld\CollisionEvents\CollisionEventGenerator.cpp" />
+    <ClCompile Include="PhysicsWorld\CollisionEvents\ICollisionListener.cpp" />
+    <ClCompile Include="PhysicsWorld\ContactSnapshot.cpp" />
+    <ClCompile Include="PhysicsWorld\PhysicsRegistration.cpp" />
+    <ClCompile Include="PhysicsWorld\PhysicsWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cyclone\Cyclone.vcxproj">
@@ -185,6 +192,13 @@
     <ClInclude Include="Gameplay\Input\InputController.h" />
     <ClInclude Include="Gameplay\Launcher\Launcher.h" />
     <ClInclude Include="Gameplay\Launcher\TrajectoryPredictor.h" />
+    <ClInclude Include="PhysicsWorld\CollisionEvents\CollisionEvent.h" />
+    <ClInclude Include="PhysicsWorld\CollisionEvents\CollisionEventDispatcher.h" />
+    <ClInclude Include="PhysicsWorld\CollisionEvents\CollisionEventGenerator.h" />
+    <ClInclude Include="PhysicsWorld\CollisionEvents\ICollisionListener.h" />
+    <ClInclude Include="PhysicsWorld\ContactSnapshot.h" />
+    <ClInclude Include="PhysicsWorld\PhysicsRegistration.h" />
+    <ClInclude Include="PhysicsWorld\PhysicsWorld.h" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Gameplay\" />
