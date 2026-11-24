@@ -5,16 +5,16 @@
 
 void GameController::Run()
 {
-  Init();
-
-  while (!WindowShouldClose())
-  {
-    const double dt = GetFrameTime();
-    ProcessInput();
-    FixedTick(dt);
-  }
-
-  Destroy();
+    Init();
+    
+    while (!WindowShouldClose())
+    {
+        const float dt = GetFrameTime();
+        ProcessInput();
+        FixedTick(dt);
+    }
+    
+    Destroy();
 }
 
 void GameController::Init()
@@ -29,7 +29,7 @@ void GameController::ProcessInput()
 {
 }
 
-void GameController::FixedTick(const double dt)
+void GameController::FixedTick(const float dt)
 {
 }
 

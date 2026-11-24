@@ -3,12 +3,12 @@
 class GameController
 {
 public:
-  void Run();
-
+    void Run();
+    
 private:
-  void Init();
-  void Destroy();
-  void ProcessInput();
-  void FixedTick(const double dt);
-  void Restart();
+    void Init();
+    void Destroy();
+    void ProcessInput();
+    void FixedTick(const float dt);
+    void Restart();
 };
