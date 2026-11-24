@@ -12,47 +12,48 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 #include "SiegeLabCore/Gameplay/Game/GameController.h"
 
-int main ()
+int main()
 {
-	GameController game_controller;
-	game_controller.Run();
-	
-	// Tell the window to use vsync and work on high DPI displays
-	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
+  GameController game_controller;
+  game_controller.Run();
 
-	// Create the window and OpenGL context
-	InitWindow(800, 600, "Hello Raylib");
+  // Tell the window to use vsync and work on high DPI displays
+  SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 
-	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
-	SearchAndSetResourceDir("resources");
+  // Create the window and OpenGL context
+  InitWindow(800, 600, "Hello Raylib");
 
-	// Load a texture from the resources directory
-	Texture wabbit = LoadTexture("wabbit_alpha.png");
-	
-	// game loop
-	while (!WindowShouldClose())		// run the loop until the user presses ESCAPE or presses the Close button on the window
-	{
-		// drawing
-		BeginDrawing();
+  // Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
+  SearchAndSetResourceDir("resources");
 
-		// Setup the back buffer for drawing (clear color and depth buffers)
-		ClearBackground(BLACK);
+  // Load a texture from the resources directory
+  Texture wabbit = LoadTexture("wabbit_alpha.png");
 
-		// draw some text using the default font
-		DrawText("Hello Raylib", 200,200,20,WHITE);
+  // game loop
+  while (!WindowShouldClose())
+  // run the loop until the user presses ESCAPE or presses the Close button on the window
+  {
+    // drawing
+    BeginDrawing();
 
-		// draw our texture to the screen
-		DrawTexture(wabbit, 400, 200, WHITE);
-		
-		// end the frame and get ready for the next one  (display frame, poll input, etc...)
-		EndDrawing();
-	}
+    // Setup the back buffer for drawing (clear color and depth buffers)
+    ClearBackground(BLACK);
 
-	// cleanup
-	// unload our texture so it can be cleaned up
-	UnloadTexture(wabbit);
+    // draw some text using the default font
+    DrawText("Hello Raylib", 200, 200, 20,WHITE);
 
-	// destroy the window and cleanup the OpenGL context
-	CloseWindow();
-	return 0;
+    // draw our texture to the screen
+    DrawTexture(wabbit, 400, 200, WHITE);
+
+    // end the frame and get ready for the next one  (display frame, poll input, etc...)
+    EndDrawing();
+  }
+
+  // cleanup
+  // unload our texture so it can be cleaned up
+  UnloadTexture(wabbit);
+
+  // destroy the window and cleanup the OpenGL context
+  CloseWindow();
+  return 0;
 }

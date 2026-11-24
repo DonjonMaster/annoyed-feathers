@@ -3,5 +3,4 @@
 class Launcher
 {
 public:
-    
 };

@@ -4,15 +4,15 @@
 
 enum SphereOrBox
 {
-    kSphere,
-    kBox
+  kSphere,
+  kBox
 };
 
 class PhysicsRegistration
 {
 private:
-    int entityId;
-    cyclone::RigidBody* body;
-    cyclone::CollisionPrimitive* collider;
-    SphereOrBox kind;
+  int entityId;
+  cyclone::RigidBody* body;
+  cyclone::CollisionPrimitive* collider;
+  SphereOrBox kind;
 };

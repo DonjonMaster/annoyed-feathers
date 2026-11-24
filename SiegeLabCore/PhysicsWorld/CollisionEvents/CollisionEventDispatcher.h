@@ -4,7 +4,7 @@
 class CollisionEventDispatcher
 {
 public:
-    void Subscribe();
-    void Unsuscribe();
-    void Publish();
+  void Subscribe();
+  void Unsuscribe();
+  void Publish();
 };

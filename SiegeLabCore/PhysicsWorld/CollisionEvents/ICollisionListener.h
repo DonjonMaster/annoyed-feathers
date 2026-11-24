@@ -3,6 +3,6 @@
 class ICollisionListener
 {
 public:
-    template <typename Events>
-    void OnCollision(Events);
+  template <typename Events>
+  void OnCollision(Events);
 };

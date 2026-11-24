@@ -4,9 +4,9 @@
 class ContactSnapshot
 {
 public:
-    cyclone::RigidBody entityA;
-    cyclone::RigidBody entityB;
-    cyclone::Vector3 point;
-    // normal
-    double closingSpeed;
+  cyclone::RigidBody entityA;
+  cyclone::RigidBody entityB;
+  cyclone::Vector3 point;
+  // normal
+  double closingSpeed;
 };

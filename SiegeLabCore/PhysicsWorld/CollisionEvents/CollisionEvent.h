@@ -4,8 +4,8 @@
 class CollisionEvent
 {
 public:
-    bool EnterOrExit;
-    cyclone::RigidBody entityA;
-    cyclone::RigidBody entityB;
-    double impactSpeed;
+  bool EnterOrExit;
+  cyclone::RigidBody entityA;
+  cyclone::RigidBody entityB;
+  double impactSpeed;
 };
