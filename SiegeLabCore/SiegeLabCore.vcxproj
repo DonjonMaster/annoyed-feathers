@@ -174,7 +174,6 @@
     <ClCompile Include="Gameplay\Launcher\Launcher.cpp" />
     <ClCompile Include="Gameplay\Launcher\ShotSettings.cpp" />
     <ClCompile Include="Gameplay\Launcher\TrajectoryPredictor.cpp" />
-        <ClCompile Include="Gameplay\Scene\ObjectPool.cpp" />
         <ClCompile Include="Gameplay\Scene\SceneObjects.cpp" />
         <ClCompile Include="Gameplay\Scene\SceneRenderer.cpp" />
     <ClCompile Include="PhysicsWorld\CollisionEvents\CollisionEvent.cpp"/>

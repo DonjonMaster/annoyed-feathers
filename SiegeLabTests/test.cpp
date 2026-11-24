@@ -17,6 +17,26 @@ TEST(Pool, RecycledSlotChangesGeneration)
 {
   ObjectPool<int, 1> pool;
   
-  int object_a = 7;
-  int object_b = 42;
+  EntityId a_id = pool.Create(7);
+  pool.Destroy(a_id);
+  EntityId b_id = pool.Create(42);
+  
+  EXPECT_EQ(b_id.slot, 0);
+  EXPECT_EQ(b_id.generation, 1);
+}
+
+TEST(Pool, StaleHandleRejected)
+{
+  ObjectPool<int, 1> pool;
+  
+  EntityId a_id = pool.Create(7);
+  pool.Destroy(a_id);
+  EntityId b_id = pool.Create(42);
+  
+  int* a = pool.Get(a_id);
+  EXPECT_FALSE(a);
+  
+  int* b = pool.Get(b_id);
+  EXPECT_TRUE(b);
+  EXPECT_EQ(*b, 42);
 }

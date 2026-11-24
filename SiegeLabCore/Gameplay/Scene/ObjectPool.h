@@ -15,6 +15,9 @@ public:
   
   // Get an object from requested ID
   T* Get(EntityId id);
+  
+  // Destroy an object from requested ID
+  void Destroy(EntityId id);
 
 private:
   std::vector<T*> objects_;

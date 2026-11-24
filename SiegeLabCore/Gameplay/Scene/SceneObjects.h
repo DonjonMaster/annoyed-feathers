@@ -9,17 +9,19 @@ class SceneObjects
 {
 public:
   template<typename T>
-  EntityId CreateEntity();
-  GameEntity* Get(int id);
+  EntityId CreateEntity() { pool_.Create<T>(); }
+  
+  // Get a GameEntity from an EntityId
+  GameEntity* Get(EntityId id);
+  
+  // Request remove of an entity with corresponding EntityId
+  void RequestRemove(EntityId id);
+  
+  // Flush removals from pool
   void FlushRemovals();
   
 private:
-  ObjectPool<GameEntity*, 32> pool_;
+  ObjectPool<GameEntity, 32> pool_;
+  std::vector<EntityId> removals_;
 };
-
-template <typename T>
-EntityId SceneObjects::CreateEntity()
-{
-  pool_.Create<T>();
-}
 

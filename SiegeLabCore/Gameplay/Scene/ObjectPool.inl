@@ -18,7 +18,7 @@ EntityId ObjectPool<T, Capacity>::Create(Args... args)
       // Define a new EntityId
       EntityId id;
       id.slot = i;
-      id.generation = generations_[i]++;
+      id.generation = generations_[i];
       
       return id;
     }
@@ -30,6 +30,19 @@ EntityId ObjectPool<T, Capacity>::Create(Args... args)
 template<typename T, int Capacity>
 T* ObjectPool<T, Capacity>::Get(EntityId id)
 {
-  for (auto object : objects_)
+  T* object = objects_[id.slot];
+  if (id.generation == generations_[id.slot])
     return object;
+  return nullptr;
+}
+
+template <typename T, int Capacity>
+void ObjectPool<T, Capacity>::Destroy(EntityId id)
+{
+  if (!is_occupied_[id.slot])
+    return;
+    
+  delete objects_[id.slot];
+  is_occupied_[id.slot] = false;
+  ++generations_[id.slot];
 }
