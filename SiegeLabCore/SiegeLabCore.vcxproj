@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClCompile Include="Gameplay\Camera\CameraManager.cpp" />
     <ClCompile Include="Gameplay\Camera\ICameraController.cpp" />
+    <ClCompile Include="Gameplay\Camera\OrbitCamera.cpp" />
     <ClCompile Include="Gameplay\Game\Blocks\Block.cpp" />
     <ClCompile Include="Gameplay\Game\Blocks\CageBlock.cpp" />
     <ClCompile Include="Gameplay\Game\Blocks\CubeBlock.cpp" />
@@ -198,6 +199,7 @@
   <ItemGroup>
     <ClInclude Include="Gameplay\Camera\CameraManager.h" />
     <ClInclude Include="Gameplay\Camera\ICameraController.h" />
+    <ClInclude Include="Gameplay\Camera\OrbitCamera.h" />
     <ClInclude Include="Gameplay\Game\Blocks\Block.h" />
     <ClInclude Include="Gameplay\Game\Blocks\CageBlock.h" />
     <ClInclude Include="Gameplay\Game\Blocks\CubeBlock.h" />
