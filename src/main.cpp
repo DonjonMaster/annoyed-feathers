@@ -7,9 +7,12 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 
 */
 
+#include <SiegeLabCore/Gameplay/Camera/OrbitCamera.h>
+
 #include "raylib.h"
 
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
+#include "SiegeLabCore/Gameplay/Camera/CameraManager.h"
 #include "SiegeLabCore/Gameplay/Game/GameController.h"
 
 int main()
@@ -29,15 +32,32 @@ int main()
   // Load a texture from the resources directory
   Texture wabbit = LoadTexture("wabbit_alpha.png");
 
+  
+  CameraManager camera_manager;
+  OrbitCamera camera;
+  
+  camera.target = {2, 1, 1};
+  
+  camera_manager.SetActive(&camera);
+  
+  InputController input_controller;
+  InputSnapshot inputs = input_controller.capture();
+  
   // game loop
   while (!WindowShouldClose())
   // run the loop until the user presses ESCAPE or presses the Close button on the window
   {
+    float dt = GetFrameTime();
+    
+    camera_manager.GetCamera().Update(inputs, dt);
+    
     // drawing
     BeginDrawing();
 
     // Setup the back buffer for drawing (clear color and depth buffers)
     ClearBackground(BLACK);
+    
+    BeginMode3D(camera);
 
     // draw some text using the default font
     DrawText("Hello Raylib", 200, 200, 20,WHITE);
@@ -45,6 +65,8 @@ int main()
     // draw our texture to the screen
     DrawTexture(wabbit, 400, 200, WHITE);
 
+    EndMode3D();
+    
     // end the frame and get ready for the next one  (display frame, poll input, etc...)
     EndDrawing();
   }
