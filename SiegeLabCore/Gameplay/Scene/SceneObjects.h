@@ -9,7 +9,13 @@ class SceneObjects
 {
 public:
   template<typename T, typename... Args>
-  EntityId CreateEntity(Args&&... args) { return pool_.Create<T>(std::forward<Args>(args)...); }
+  EntityId CreateEntity(Args&&... args)
+  {
+    EntityId id = pool_.Create<T>(std::forward<Args>(args)...);
+    GameEntity* game_entity = Get(id);
+    game_entity->id_ = id;
+    return id;
+  }
   
   // Get a GameEntity from an EntityId
   GameEntity* Get(EntityId id);

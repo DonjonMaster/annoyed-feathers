@@ -90,19 +90,6 @@ TEST(Pool, ClearInvalidateHandles)
   EXPECT_EQ(*pool.Get(c_id), 30);
 }
 
-TEST(Entities, FactoryCreatesDerivedTypes)
-{
-  SceneObjects scene_objects;
-  
-  EntityId standard_id = scene_objects.CreateEntity<StandardProjectile>();
-  EntityId heavy_id = scene_objects.CreateEntity<HeavyProjectile>();
-  
-  EXPECT_TRUE(standard_id.IsValid());
-  EXPECT_TRUE(heavy_id.IsValid());
-  EXPECT_TRUE(scene_objects.Get(standard_id) != nullptr);
-  EXPECT_TRUE(scene_objects.Get(heavy_id) != nullptr);
-}
-
 TEST(Camera, TargetAndRadiusRemainStable)
 {
   OrbitCamera camera;

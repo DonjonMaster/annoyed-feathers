@@ -92,6 +92,8 @@ if(BUILD_TESTING)
 
     add_executable(SiegeLabTests SiegeLabTests/test.cpp)
     target_link_libraries(SiegeLabTests PRIVATE SiegeLabCore GTest::gtest_main)
+    add_executable(SiegeLabEntitiesTests SiegeLabTests/EntitiesTest.cpp)
+    target_link_libraries(SiegeLabEntitiesTests PRIVATE SiegeLabCore GTest::gtest_main)
 
     include(GoogleTest)
     gtest_discover_tests(SiegeLabTests)
