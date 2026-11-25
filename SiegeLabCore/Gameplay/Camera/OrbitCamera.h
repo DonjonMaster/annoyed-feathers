@@ -1,13 +1,15 @@
 ﻿#pragma once
+#include "ICameraController.h"
 #include "SiegeLabCore/Gameplay/Input/InputController.h"
 
-class OrbitCamera
+class OrbitCamera : public ICameraController , public Camera3D
 {
+private:
+  ICameraController* camera_controller_;
 public:
-  float rotationSpeed;
-  Vector3 target;
-  float yaw;
-  float pitch;
-  float radius;
-  float zoom;
+  void Update(const InputSnapshot& input, float dt) override;
+  Vector3 target = {0, 0, 0};
+  float yaw = 0;
+  float pitch = 0;
+  float rotationSpeed = 2.0f;
 };

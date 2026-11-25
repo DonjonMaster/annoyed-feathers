@@ -1,16 +1,16 @@
 ﻿#pragma once
-#include "OrbitCamera.h"
 #include "SiegeLabCore/Gameplay/Input/InputController.h"
+
+class OrbitCamera;
 
 class ICameraController
 {
 public:
-  void Update(const InputSnapshot& input, float dt); 
-  OrbitCamera getCamera()
-  {
-    return camera_;
-  }
-  void reset();
+  virtual ~ICameraController() = default;
+  
+  virtual void Update(const InputSnapshot& input, float dt){} 
+  OrbitCamera GetCamera();
+  void Reset();
 private:
-  OrbitCamera camera_;
+  OrbitCamera* camera_;
 };
