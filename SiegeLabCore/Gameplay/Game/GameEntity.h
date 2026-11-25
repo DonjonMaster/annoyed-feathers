@@ -9,7 +9,7 @@ class GameEntity
 public:
   virtual ~GameEntity() = default;
   virtual void ConfigurePhysics() {}
-  virtual void RegisterPhysics(PhysicsWorld world) {}
+  virtual void RegisterPhysics(PhysicsWorld& world) {}
   virtual void Draw() {}
   
   cyclone::RigidBody& GetBody() {return  body_;}
