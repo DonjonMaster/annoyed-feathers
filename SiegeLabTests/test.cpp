@@ -3,6 +3,7 @@
 #include "../SiegeLabCore/Gameplay/Scene/ObjectPool.h"
 #include "../SiegeLabCore/Gameplay/Scene/SceneObjects.h"
 #include "gtest/gtest.h"
+#include "SiegeLabCore/Gameplay/Launcher/Launcher.h"
 
 TEST(Pool, CapacityLimit)
 {
