@@ -1,15 +1,15 @@
 ﻿#pragma once
 
 template<typename T, int Capacity>
-template<typename... Args>
-EntityId ObjectPool<T, Capacity>::Create(Args... args)
+template<typename U, typename... Args>
+EntityId ObjectPool<T, Capacity>::Create(Args&&... args)
 {
   for (int i = 0; i < Capacity; ++i)
   {
     if (!is_occupied_[i])
     {
       // Make new object
-      T* object = new T(args...);
+      T* object = new U(std::forward<Args>(args)...);
       objects_[i] = object;
       
       // Define `i` slot as occupied
@@ -45,4 +45,18 @@ void ObjectPool<T, Capacity>::Destroy(EntityId id)
   delete objects_[id.slot];
   is_occupied_[id.slot] = false;
   ++generations_[id.slot];
+}
+
+template <typename T, int Capacity>
+void ObjectPool<T, Capacity>::Clear()
+{
+  for (int i = 0; i < Capacity; ++i)
+  {
+    if (is_occupied_[i])
+    {
+      EntityId id;
+      id.slot = i;
+      Destroy(id);
+    }
+  }
 }

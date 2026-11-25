@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "Projectile.h"
 
-class HeavyProjectile : Projectile
+class HeavyProjectile : public Projectile
 {
 public:
-  void ConfigurePhysics() override;
+  void ConfigurePhysics() override {}
 };
