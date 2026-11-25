@@ -42,6 +42,14 @@
         <None Include="packages.config"/>
     </ItemGroup>
     <ItemGroup>
+        <ProjectReference Include="..\annoyed-feathers.vcxproj">
+          <Project>{5225b0a0-3e1e-cff2-6750-b47753a8aefe}</Project>
+          <Name>annoyed-feathers</Name>
+        </ProjectReference>
+        <ProjectReference Include="..\Cyclone\Cyclone.vcxproj">
+          <Project>{ed99fa78-55cd-4e4b-aa57-63e426090293}</Project>
+          <Name>Cyclone</Name>
+        </ProjectReference>
         <ProjectReference Include="..\raylib.vcxproj">
             <Project>{8898ea18-743a-15ef-5df5-284349369c3f}</Project>
             <Name>raylib</Name>
@@ -80,6 +88,7 @@
             <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
             <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
             <WarningLevel>Level3</WarningLevel>
+            <AdditionalIncludeDirectories>$(SolutionDir);$(MSBuildThisFileDirectory)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
         <Link>
             <GenerateDebugInformation>true</GenerateDebugInformation>
