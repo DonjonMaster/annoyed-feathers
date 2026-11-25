@@ -10,14 +10,17 @@ public:
   ObjectPool() : objects_(Capacity), is_occupied_(Capacity), generations_(Capacity) {}
   
   // Create an object inside the object pool, fails if object pool is full
-  template<typename... Args>
-  EntityId Create(Args... args);
+  template<typename U = T, typename... Args>
+  EntityId Create(Args&&... args);
   
   // Get an object from requested ID
   T* Get(EntityId id);
   
   // Destroy an object from requested ID
   void Destroy(EntityId id);
+  
+  // Clear all objects in pool
+  void Clear();
 
 private:
   std::vector<T*> objects_;
