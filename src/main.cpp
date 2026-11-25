@@ -36,6 +36,8 @@ int main()
   CameraManager camera_manager;
   OrbitCamera camera;
   
+  camera.target = {2, 1, 1};
+  
   camera_manager.SetActive(&camera);
   
   InputController input_controller;
