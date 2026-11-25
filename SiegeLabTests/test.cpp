@@ -1,12 +1,11 @@
-#include <raylib.h>
-
-#include "../SiegeLabCore/Gameplay/Game/Projectiles/HeavyProjectile.h"
-#include "../SiegeLabCore/Gameplay/Game/Projectiles/StandardProjectile.h"
-#include "../SiegeLabCore/Gameplay/Scene/ObjectPool.h"
-#include "../SiegeLabCore/Gameplay/Scene/SceneObjects.h"
-#include "SiegeLabCore/Gameplay/Launcher/Launcher.h"
 #include "gtest/gtest.h"
+
 #include "SiegeLabCore/Gameplay/Camera/OrbitCamera.h"
+#include "SiegeLabCore/Gameplay/Game/Projectiles/HeavyProjectile.h"
+#include "SiegeLabCore/Gameplay/Game/Projectiles/StandardProjectile.h"
+#include "SiegeLabCore/Gameplay/Scene/ObjectPool.h"
+#include "SiegeLabCore/Gameplay/Scene/SceneObjects.h"
+#include "SiegeLabCore/Gameplay/Launcher/Launcher.h"
 
 namespace
 {
@@ -25,6 +24,7 @@ namespace
     return std::sqrt(dx * dx + dy * dy + dz * dz);
   }
 }
+
 TEST(Pool, CapacityLimit)
 {
   ObjectPool<int, 3> pool;

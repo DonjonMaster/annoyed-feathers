@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <raymath.h>
 
-void Launcher::Aim()
+void Launcher::Aim(InputSnapshot& input)
 {
   int yaw_direction = 0;
   int pitch_direction = 0;
@@ -19,15 +19,23 @@ void Launcher::Aim()
 
 ShotSettings Launcher::GetShotSettings()
 {
+  const float a = yaw * DEG2RAD;
+  const float e = pitch * DEG2RAD;
+  
+  // Direction made of azimuth (yaw) and elevations (pitch)
+  Vector3 direction =
+  {
+    cosf(e) * cosf(a),
+    sinf(e),
+    cosf(e) * sinf(a)
+  }; 
+  
+  direction = Vector3Normalize(direction);
+  
+  // Make shot settings :)
   ShotSettings shot_settings;
-  
-  Matrix x_rotation = MatrixRotateX(yaw * DEG2RAD);
-  Matrix y_rotation = MatrixRotateY(pitch * DEG2RAD);
-  
-  cyclone::Vector3 direction_vector = 
-  
   shot_settings.origin = { 0, 0, 0 };
-  shot_settings.direction = { 0, 0, 0 };
+  shot_settings.direction = direction;
   shot_settings.speed = speed;
   shot_settings.kind = kind;
   

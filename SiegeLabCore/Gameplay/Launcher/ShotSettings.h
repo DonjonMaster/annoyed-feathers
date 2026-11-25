@@ -1,10 +1,10 @@
 ﻿#pragma once
-#include "core.h"
+#include <raylib.h>
 
 struct ShotSettings
 {
-  cyclone::Vector3 origin;
-  cyclone::Vector3 direction;
+  Vector3 origin;
+  Vector3 direction;
   int speed;
   int kind;
 };

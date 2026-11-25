@@ -5,17 +5,17 @@
 void OrbitCamera::Update(const InputSnapshot& input, float dt)
 {
   const float yawAxis =
-        static_cast<float>(input.isDown(InputButton::YawRight)) -
-        static_cast<float>(input.isDown(InputButton::YawLeft));
+        static_cast<float>(input.isDown(InputButton::kYawRight)) -
+        static_cast<float>(input.isDown(InputButton::kYawLeft));
 
   const float pitchAxis =
-      static_cast<float>(input.isDown(InputButton::PitchUp)) -
-      static_cast<float>(input.isDown(InputButton::PitchDown));
+      static_cast<float>(input.isDown(InputButton::kPitchUp)) -
+      static_cast<float>(input.isDown(InputButton::kPitchDown));
   
   yaw += yawAxis * rotationSpeed * dt;
   pitch += pitchAxis * rotationSpeed * dt;
   
-  if (input.isDown(InputButton::Orbit))
+  if (input.isDown(InputButton::kOrbit))
   {
     yaw += input.mouseDelta.x;
     pitch -= input.mouseDelta.y;
