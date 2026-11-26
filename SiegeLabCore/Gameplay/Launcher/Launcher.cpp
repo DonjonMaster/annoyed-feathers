@@ -41,14 +41,14 @@ ShotSettings Launcher::GetShotSettings() const
   const float e = m_pitch * DEG2RAD;
 
   // Direction made of azimuth (yaw) and elevations (pitch)
-  Vector3 direction =
+  cyclone::Vector3 direction =
   {
     cosf(e) * cosf(a),
     sinf(e),
     cosf(e) * sinf(a)
   };
 
-  direction = Vector3Normalize(direction);
+  direction.normalise();
 
   // Make shot settings :)
   ShotSettings shot_settings;

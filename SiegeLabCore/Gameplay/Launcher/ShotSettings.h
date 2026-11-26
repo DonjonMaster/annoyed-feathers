@@ -1,5 +1,6 @@
 ﻿#pragma once
-#include <raylib.h>
+
+#include "core.h"
 
 enum class ProjectileKind
 {
@@ -9,8 +10,8 @@ enum class ProjectileKind
 
 struct ShotSettings
 {
-  Vector3 origin;
-  Vector3 direction;
+  cyclone::Vector3 origin;
+  cyclone::Vector3 direction;
   int speed;
   ProjectileKind kind;
 };

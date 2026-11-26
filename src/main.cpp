@@ -37,7 +37,7 @@ int main()
   Launcher launcher;
   ShotSettings shot_settings = launcher.GetShotSettings();
   TrajectoryPredictor trajectory_predictor;
-  trajectory_predictor.PredictUntilFirstContact(shot_settings);
+  TrajectoryPrediction prediction = trajectory_predictor.PredictUntilFirstContact(shot_settings);
   
   CameraManager camera_manager;
   OrbitCamera camera;
@@ -73,6 +73,15 @@ int main()
     
     DrawCube({2, 1, 1}, 2, 2, 2, WHITE);
 
+    for (int i = 0; i < prediction.positions.size() - 1; ++i)
+    {
+      cyclone::Vector3 a = prediction.positions[i];
+      cyclone::Vector3 b = prediction.positions[i + 1];
+      Vector3 c(a.x, a.y, a.z);
+      Vector3 d(b.x, b.y, b.z);
+      DrawLine3D(c, d, RED);
+    }
+    
     EndMode3D();
     
     // end the frame and get ready for the next one  (display frame, poll input, etc...)
