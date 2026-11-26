@@ -8,12 +8,18 @@
 class SceneObjects
 {
 public:
-  template <typename T, typename... Args>
+  template<typename T, typename... Args>
   EntityId CreateEntity(Args&&... args)
   {
-    return pool_.Create<T>(std::forward<Args>(args)...);
+    EntityId id = pool_.Create<T>(std::forward<Args>(args)...);
+    GameEntity* game_entity = Get(id);
+    game_entity->id_ = id;
+    game_entity->ConfigurePhysics();
+    game_entity->RegisterPhysics(world);
+    
+    return id;
   }
-
+  
   // Get a GameEntity from an EntityId
   GameEntity* Get(EntityId id);
 
@@ -26,4 +32,5 @@ public:
 private:
   ObjectPool<GameEntity, 32> pool_;
   std::vector<EntityId> removals_;
+  PhysicsWorld world;
 };

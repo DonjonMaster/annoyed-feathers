@@ -93,6 +93,8 @@ if(BUILD_TESTING)
 
     add_executable(SiegeLabTests SiegeLabTests/test.cpp)
     target_link_libraries(SiegeLabTests PRIVATE SiegeLabCore GTest::gtest_main)
+    add_executable(SiegeLabEntitiesTests SiegeLabTests/EntitiesTest.cpp)
+    target_link_libraries(SiegeLabEntitiesTests PRIVATE SiegeLabCore GTest::gtest_main)
     add_executable(SiegeLabLauncherTests SiegeLabTests/LauncherTests.cpp)
     target_link_libraries(SiegeLabLauncherTests PRIVATE SiegeLabCore GTest::gtest_main)
 

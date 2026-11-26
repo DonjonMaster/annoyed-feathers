@@ -5,16 +5,12 @@
 class Projectile : public GameEntity
 {
 public:
+  Projectile();
+  
   void Fire(ShotSettings settings);
+  void RegisterPhysics(PhysicsWorld& world) override;
+  void Draw() override {}
 
-  void RegisterPhysics(PhysicsWorld world) override
-  {
-  }
-
-  void Draw() override
-  {
-  }
-
-private:
-  cyclone::CollisionSphere m_sphere;
+protected:
+  cyclone::CollisionSphere sphere_;
 };
