@@ -4,5 +4,7 @@
 class StandardProjectile : public Projectile
 {
 public:
-  void ConfigurePhysics() override {}
+  void ConfigurePhysics() override
+  {
+  }
 };

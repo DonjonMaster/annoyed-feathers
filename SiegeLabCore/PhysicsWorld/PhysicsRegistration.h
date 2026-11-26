@@ -10,7 +10,6 @@ enum SphereOrBox
 
 class PhysicsRegistration
 {
-private:
   int entityId;
   cyclone::RigidBody* body;
   cyclone::CollisionPrimitive* collider;

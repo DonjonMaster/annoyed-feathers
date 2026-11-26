@@ -1,5 +1,10 @@
 ﻿#pragma once
+#include <raylib.h>
 
-class ShotSettings
+struct ShotSettings
 {
+  Vector3 origin;
+  Vector3 direction;
+  int speed;
+  int kind;
 };
