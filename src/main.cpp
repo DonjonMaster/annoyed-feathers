@@ -41,13 +41,13 @@ int main()
   camera_manager.SetActive(&camera);
   
   InputController input_controller;
-  InputSnapshot inputs = input_controller.capture();
   
   // game loop
   while (!WindowShouldClose())
   // run the loop until the user presses ESCAPE or presses the Close button on the window
   {
     float dt = GetFrameTime();
+    InputSnapshot inputs = input_controller.capture();
     
     camera_manager.GetCamera().Update(inputs, dt);
     
@@ -64,6 +64,8 @@ int main()
 
     // draw our texture to the screen
     DrawTexture(wabbit, 400, 200, WHITE);
+    
+    DrawCube({2, 1, 1}, 2, 2, 2, WHITE);
 
     EndMode3D();
     

@@ -20,6 +20,12 @@ void OrbitCamera::Update(const InputSnapshot& input, float dt)
     yaw += input.mouseDelta.x;
     pitch -= input.mouseDelta.y;
   }
+  
+  position = Position();
+  Camera3D::target = target;
+  up = {0, 1, 0};
+  fovy = 45.0f;
+  projection = CAMERA_PERSPECTIVE;
 }
 
 Vector3 OrbitCamera::Position() const
