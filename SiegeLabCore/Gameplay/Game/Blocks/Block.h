@@ -5,7 +5,7 @@
 class Block : public GameEntity
 {
 public:
-  void RegisterPhysics(PhysicsWorld world) override;
+  void RegisterPhysics(PhysicsWorld& world) override;
   void Draw() override;
 
 private:

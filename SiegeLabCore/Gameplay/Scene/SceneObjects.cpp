@@ -18,6 +18,13 @@ void SceneObjects::RequestRemove(EntityId id)
 
 void SceneObjects::FlushRemovals()
 {
-  for (auto removal : removals_)
-    pool_.Destroy(removal);
+  for (EntityId id : removals_)
+  {
+    if (GameEntity* entity = Get(id))
+    {
+      world.UnregisterObject(id);
+      pool_.Destroy(id);
+    }
+  }
+  removals_.clear();
 }
