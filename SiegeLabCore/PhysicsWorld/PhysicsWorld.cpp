@@ -27,7 +27,7 @@ void PhysicsWorld::UnregisterObject(EntityId id)
                 });
 }
 
-void PhysicsWorld::GameEntitiesCollisions(cyclone::CollisionData data, std::function<bool()> canDetect)
+void PhysicsWorld::GameEntitiesCollisions(cyclone::CollisionData data)
 {
   for (std::size_t i = 0; i < registrations_.size(); ++i)
   {
@@ -41,28 +41,28 @@ void PhysicsWorld::GameEntitiesCollisions(cyclone::CollisionData data, std::func
       const bool bFixed = b.body->getInverseMass() <= 0;
       if (aFixed && bFixed)
         continue;
-      
+      if (
+          !(a.collision_sphere || a.collision_box) ||
+          !(b.collision_sphere || b.collision_box)
+      )
+        continue;
       if (a.collision_sphere && b.collision_sphere)
       {
-        if (canDetect())
           cyclone::CollisionDetector::sphereAndSphere(
             *a.collision_sphere, *b.collision_sphere, &data);
       }
       else if (a.collision_sphere && b.collision_box)
       {
-        if (canDetect())
           cyclone::CollisionDetector::boxAndSphere(
             *b.collision_box, *a.collision_sphere, &data);
       }
       else if (a.collision_box && b.collision_sphere)
       {
-        if (canDetect())
           cyclone::CollisionDetector::boxAndSphere(
             *a.collision_box, *b.collision_sphere, &data);
       }
       else if (a.collision_box && b.collision_box)
       {
-        if (canDetect())
           cyclone::CollisionDetector::boxAndBox(
             *a.collision_box, *b.collision_box, &data);
       }
@@ -70,7 +70,7 @@ void PhysicsWorld::GameEntitiesCollisions(cyclone::CollisionData data, std::func
   }
 }
 
-void PhysicsWorld::PlanesCollisions(cyclone::CollisionData data, std::function<bool()> canDetect)
+void PhysicsWorld::PlanesCollisions(cyclone::CollisionData data)
 {
   for (auto& r : registrations_)
   {
@@ -81,13 +81,11 @@ void PhysicsWorld::PlanesCollisions(cyclone::CollisionData data, std::function<b
     {
       if (r.collision_sphere)
       {
-        if (canDetect())
           cyclone::CollisionDetector::sphereAndHalfSpace(
             *r.collision_sphere, *plane, &data);
       }
       else if (r.collision_box)
       {
-        if (canDetect())
           cyclone::CollisionDetector::boxAndHalfSpace(
             *r.collision_box, *plane, &data);
       }
@@ -152,22 +150,14 @@ void PhysicsWorld::Step(const float dt)
 
   cyclone::CollisionData data = createCollisionData();
 
-  bool coverageIncomplete = false;
-
-  auto canDetect = [&]()
-  {
-    if (data.hasMoreContacts())
-      return true;
-
-    coverageIncomplete = true;
-    return false;
-  };
+  if (!data.hasMoreContacts())
+      return;
 
   // GameEntities collisions
-  GameEntitiesCollisions(data, canDetect);
+  GameEntitiesCollisions(data);
 
   // Collisions with planes
-  PlanesCollisions(data, canDetect);
+  PlanesCollisions(data);
 
   // Resolve contacts
   if (data.contactCount > 0)

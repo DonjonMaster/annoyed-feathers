@@ -20,9 +20,8 @@ public:
   void Step(const float dt);
   void Reset();
 private:
-  void GameEntitiesCollisions(cyclone::CollisionData data,
-                              std::function<bool()> canDetect);
-  void PlanesCollisions(cyclone::CollisionData data,std::function<bool()> canDetect);
+  void GameEntitiesCollisions(cyclone::CollisionData data);
+  void PlanesCollisions(cyclone::CollisionData data);
   void AfterContact();
   void BeforeContact();
   void Integrate(float dt);
