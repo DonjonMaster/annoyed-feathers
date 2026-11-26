@@ -5,16 +5,16 @@
 
 void GameController::Run()
 {
-    Init();
-    
-    while (!WindowShouldClose())
-    {
-        const float dt = GetFrameTime();
-        ProcessInput();
-        FixedTick(dt);
-    }
-    
-    Destroy();
+  Init();
+
+  while (!WindowShouldClose())
+  {
+    const float dt = GetFrameTime();
+    ProcessInput();
+    FixedTick(dt);
+  }
+
+  Destroy();
 }
 
 void GameController::Init()

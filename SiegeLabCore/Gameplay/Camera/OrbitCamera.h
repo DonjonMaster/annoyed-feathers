@@ -2,10 +2,10 @@
 #include "ICameraController.h"
 #include "SiegeLabCore/Gameplay/Input/InputController.h"
 
-class OrbitCamera : public ICameraController , public Camera3D
+class OrbitCamera : public ICameraController, public Camera3D
 {
-private:
   ICameraController* camera_controller_;
+
 public:
   void Update(const InputSnapshot& input, float dt) override;
   Vector3 Position() const;

@@ -9,7 +9,7 @@ public:
   {
     controller_ = controller;
   }
-  ICameraController GetCamera()
+  ICameraController& GetCamera()
   {
     return *controller_;
   }

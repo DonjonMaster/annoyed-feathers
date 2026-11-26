@@ -56,6 +56,7 @@ file(GLOB_RECURSE SIEGELAB_CORE_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/SiegeLabCore/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/SiegeLabCore/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/SiegeLabCore/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/SiegeLabCore/*.inl"
 )
 add_library(SiegeLabCore STATIC ${SIEGELAB_CORE_SOURCES})
 target_include_directories(SiegeLabCore PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -94,6 +95,8 @@ if(BUILD_TESTING)
     target_link_libraries(SiegeLabTests PRIVATE SiegeLabCore GTest::gtest_main)
     add_executable(SiegeLabEntitiesTests SiegeLabTests/EntitiesTest.cpp)
     target_link_libraries(SiegeLabEntitiesTests PRIVATE SiegeLabCore GTest::gtest_main)
+    add_executable(SiegeLabLauncherTests SiegeLabTests/LauncherTests.cpp)
+    target_link_libraries(SiegeLabLauncherTests PRIVATE SiegeLabCore GTest::gtest_main)
 
     include(GoogleTest)
     gtest_discover_tests(SiegeLabTests)
