@@ -7,16 +7,13 @@
 
 enum class InputButton
 {
-  // Global
-  kCount,
-  
   // Camera
   kOrbit,
   kYawLeft,
   kYawRight,
   kPitchUp,
   kPitchDown,
-  
+
   // Launcher
   kLauncherUp,
   kLauncherDown,
@@ -26,17 +23,20 @@ enum class InputButton
   kLauncherSpeedDown,
   kLauncherSelectKindHeavy,
   kLauncherSelectKindStandard,
+  
+  // Global
+  kCount,
 };
 
 struct InputSnapshot
 {
   // Only for buttons inputs, not analog inputs
-  std::bitset<static_cast<std::size_t>(InputButton::kCount)>buttons;
-  
+  std::bitset<static_cast<std::size_t>(InputButton::kCount)> buttons;
+
   // For analog input, still use floats
   Vector2 mouseDelta{};
   float wheelDelta = 0.0f;
-  
+
   bool isDown(InputButton button) const
   {
     return buttons.test(static_cast<std::size_t>(button));
@@ -49,6 +49,6 @@ public:
   InputSnapshot capture();
 
 private:
-  void CaptureCameraInputs(InputSnapshot input);
-  void CaptureLauncherInputs(InputSnapshot input);
+  void CaptureCameraInputs(InputSnapshot& _input);
+  void CaptureLauncherInputs(InputSnapshot& _input);
 };

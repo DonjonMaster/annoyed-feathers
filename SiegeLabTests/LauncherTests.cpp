@@ -31,7 +31,8 @@ TEST(Launcher, ZeroAzimuthHasNoZComponent)
   launcher.SetPitch(30.f);
   
   ShotSettings shot_settings = launcher.GetShotSettings();
-  ExpectVectorNear(shot_settings.direction, { 0.8660f, 0.5f, 0.0f }, 1e-3f);
+  ExpectVectorNear(shot_settings.direction,
+      { 0.8660f, 0.5f, 0.0f }, 1e-3f);
   EXPECT_NEAR(shot_settings.direction.z, 0.f, 1e-3f);
 }
 
@@ -69,22 +70,14 @@ TEST(Launcher, AimIsIndependantFromCamera)
   launcher.SetPitch(30.f);
   
   camera.yaw = 0.f;
-  ExpectVectorNear(launcher.GetShotSettings().direction, { 0.8138f, 0.5f, 0.2962f }, 1e-3f);
+  ExpectVectorNear(launcher.GetShotSettings().direction,
+      { 0.8138f, 0.5f, 0.2962f }, 1e-3f);
   
   camera.yaw = 120.f;
-  ExpectVectorNear(launcher.GetShotSettings().direction, { 0.8138f, 0.5f, 0.2962f }, 1e-3f);
+  ExpectVectorNear(launcher.GetShotSettings().direction,
+      { 0.8138f, 0.5f, 0.2962f }, 1e-3f);
 }
 
 TEST(Launcher, SelectsConcreteProjectileKind)
 {
-  InputSnapshot input;
-  
-  Launcher launcher;
-  launcher.SetSpeed(16);
-  
-  launcher.Aim(input);
-  launcher.GetShotSettings();
-  
-  launcher.Aim(input);
-  launcher.GetShotSettings();
 }

@@ -3,7 +3,6 @@
 
 class CollisionEventGenerator
 {
-private:
   void Generate(ContactSnapshot snapshot);
   void Reset();
 };

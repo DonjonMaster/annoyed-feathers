@@ -6,19 +6,19 @@ EntityId ObjectPool<T, Capacity>::Create(Args&&... args)
 {
   for (int i = 0; i < Capacity; ++i)
   {
-    if (!is_occupied_[i])
+    if (!m_is_occupied[i])
     {
       // Make new object
       T* object = new U(std::forward<Args>(args)...);
-      objects_[i] = object;
+      m_objects[i] = object;
       
       // Define `i` slot as occupied
-      is_occupied_[i] = true;
+      m_is_occupied[i] = true;
       
       // Define a new EntityId
       EntityId id;
       id.slot = i;
-      id.generation = generations_[i];
+      id.generation = m_generations[i];
       
       return id;
     }
@@ -30,8 +30,8 @@ EntityId ObjectPool<T, Capacity>::Create(Args&&... args)
 template<typename T, int Capacity>
 T* ObjectPool<T, Capacity>::Get(EntityId id)
 {
-  T* object = objects_[id.slot];
-  if (id.generation == generations_[id.slot])
+  T* object = m_objects[id.slot];
+  if (id.generation == m_generations[id.slot])
     return object;
   return nullptr;
 }
@@ -39,12 +39,12 @@ T* ObjectPool<T, Capacity>::Get(EntityId id)
 template <typename T, int Capacity>
 void ObjectPool<T, Capacity>::Destroy(EntityId id)
 {
-  if (!is_occupied_[id.slot])
+  if (!m_is_occupied[id.slot])
     return;
     
-  delete objects_[id.slot];
-  is_occupied_[id.slot] = false;
-  ++generations_[id.slot];
+  delete m_objects[id.slot];
+  m_is_occupied[id.slot] = false;
+  ++m_generations[id.slot];
 }
 
 template <typename T, int Capacity>
@@ -52,7 +52,7 @@ void ObjectPool<T, Capacity>::Clear()
 {
   for (int i = 0; i < Capacity; ++i)
   {
-    if (is_occupied_[i])
+    if (m_is_occupied[i])
     {
       EntityId id;
       id.slot = i;

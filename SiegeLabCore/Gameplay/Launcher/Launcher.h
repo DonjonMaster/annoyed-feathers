@@ -1,27 +1,28 @@
 ﻿#pragma once
 #include "ShotSettings.h"
+#include "SiegeLabCore/Gameplay/Game/GameEntity.h"
 #include "SiegeLabCore/Gameplay/Input/InputController.h"
 
 class Launcher
 {
 public:
-  void Aim(InputSnapshot& input);
-  ShotSettings GetShotSettings();
+  void Aim(const InputSnapshot& _input);
+  ShotSettings GetShotSettings() const;
   
   void SetYaw(float _yaw);
   void SetPitch(float _pitch);
   void SetSpeed(int _speed);
-  
-  float GetYaw() { return yaw; }
-  float GetPitch() { return pitch; }
-  int GetSpeed() { return speed; }
-  
+
+  float GetYaw() const { return m_yaw; }
+  float GetPitch() const { return m_pitch; }
+  int GetSpeed() const { return m_speed; }
+
 private:
-  int speed = 12;
-  float yaw = 0.f;
-  float pitch = 30.f;
-  
+  int m_speed = 12;
+  float m_yaw = 0.f;
+  float m_pitch = 30.f;
+
   /*  0 = StandardProjectile
-   *  1 = HeavyProjectile */
-  int kind = 0;
+      1 = HeavyProjectile */
+  int m_kind = 0;
 };

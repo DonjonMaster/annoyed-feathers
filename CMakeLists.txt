@@ -56,6 +56,7 @@ file(GLOB_RECURSE SIEGELAB_CORE_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/SiegeLabCore/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/SiegeLabCore/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/SiegeLabCore/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/SiegeLabCore/*.inl"
 )
 add_library(SiegeLabCore STATIC ${SIEGELAB_CORE_SOURCES})
 target_include_directories(SiegeLabCore PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
