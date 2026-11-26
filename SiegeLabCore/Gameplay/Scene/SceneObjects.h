@@ -14,6 +14,9 @@ public:
     EntityId id = pool_.Create<T>(std::forward<Args>(args)...);
     GameEntity* game_entity = Get(id);
     game_entity->id_ = id;
+    game_entity->ConfigurePhysics();
+    game_entity->RegisterPhysics(world);
+    
     return id;
   }
   
@@ -29,5 +32,6 @@ public:
 private:
   ObjectPool<GameEntity, 32> pool_;
   std::vector<EntityId> removals_;
+  PhysicsWorld world;
 };
 
