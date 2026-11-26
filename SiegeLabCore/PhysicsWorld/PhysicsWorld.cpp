@@ -1,15 +1,15 @@
 ﻿#include "PhysicsWorld.h"
 
 void PhysicsWorld::RegisterSphere(EntityId id, cyclone::RigidBody& body,
-  cyclone::CollisionSphere& sphere)
+                                  cyclone::CollisionSphere& sphere)
 {
-  registrations_.push_back({id, &body, &sphere, kSphere});
+  registrations_.push_back({id, &body, &sphere, nullptr, kSphere});
 }
 
 void PhysicsWorld::RegisterBox(EntityId id, cyclone::RigidBody& body,
   cyclone::CollisionBox& box)
 {
-  registrations_.push_back({id, &body, &box, kBox});
+  registrations_.push_back({id, &body, nullptr, &box, kBox});
 }
 
 void PhysicsWorld::RegisterPlane(cyclone::CollisionPlane plane)
@@ -27,7 +27,7 @@ void PhysicsWorld::UnregisterObject(EntityId id)
                 });
 }
 
-void PhysicsWorld::GameEntitiesCollisions(cyclone::CollisionData data, <lambda bool()> canDetect)
+void PhysicsWorld::GameEntitiesCollisions(cyclone::CollisionData data, std::function<bool()> canDetect)
 {
   for (std::size_t i = 0; i < registrations_.size(); ++i)
   {
@@ -70,7 +70,7 @@ void PhysicsWorld::GameEntitiesCollisions(cyclone::CollisionData data, <lambda b
   }
 }
 
-void PhysicsWorld::PlanesCollisions(cyclone::CollisionData data, <lambda bool()> canDetect)
+void PhysicsWorld::PlanesCollisions(cyclone::CollisionData data, std::function<bool()> canDetect)
 {
   for (auto& r : registrations_)
   {

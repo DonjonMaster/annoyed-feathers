@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <array>
+#include <functional>
 #include <vector>
 
 #include "PhysicsRegistration.h"
@@ -20,10 +21,8 @@ public:
   void Reset();
 private:
   void GameEntitiesCollisions(cyclone::CollisionData data,
-                              __resharper_unknown_type, bool(),
-                              __resharper_unknown_type);
-  void PlanesCollisions(cyclone::CollisionData data, __resharper_unknown_type,
-                        bool(), __resharper_unknown_type);
+                              std::function<bool()> canDetect);
+  void PlanesCollisions(cyclone::CollisionData data,std::function<bool()> canDetect);
   void AfterContact();
   void BeforeContact();
   void Integrate(float dt);
