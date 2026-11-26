@@ -16,5 +16,5 @@ public:
   }
 
 private:
-  cyclone::CollisionSphere sphere_;
+  cyclone::CollisionSphere m_sphere;
 };

@@ -14,6 +14,8 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 #include "SiegeLabCore/Gameplay/Camera/CameraManager.h"
 #include "SiegeLabCore/Gameplay/Game/GameController.h"
+#include "SiegeLabCore/Gameplay/Launcher/Launcher.h"
+#include "SiegeLabCore/Gameplay/Launcher/TrajectoryPredictor.h"
 
 int main()
 {
@@ -32,6 +34,10 @@ int main()
   // Load a texture from the resources directory
   Texture wabbit = LoadTexture("wabbit_alpha.png");
 
+  Launcher launcher;
+  ShotSettings shot_settings = launcher.GetShotSettings();
+  TrajectoryPredictor trajectory_predictor;
+  trajectory_predictor.PredictUntilFirstContact(shot_settings);
   
   CameraManager camera_manager;
   OrbitCamera camera;

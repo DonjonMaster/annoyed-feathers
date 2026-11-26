@@ -29,8 +29,10 @@ void Launcher::Aim(const InputSnapshot& _input)
     SetSpeed(m_speed + delta_speed);
 
   // Change kind if an input is pressed
-  if (_input.isDown(InputButton::kLauncherSelectKindStandard)) m_kind = 0;
-  if (_input.isDown(InputButton::kLauncherSelectKindHeavy)) m_kind = 1;
+  if (_input.isDown(InputButton::kLauncherSelectKindStandard))
+    m_kind = ProjectileKind::kStandard;
+  if (_input.isDown(InputButton::kLauncherSelectKindHeavy))
+    m_kind = ProjectileKind::kHeavy;
 }
 
 ShotSettings Launcher::GetShotSettings() const

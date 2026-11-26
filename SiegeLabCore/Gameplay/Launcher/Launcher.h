@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "ShotSettings.h"
-#include "SiegeLabCore/Gameplay/Game/GameEntity.h"
 #include "SiegeLabCore/Gameplay/Input/InputController.h"
 
 class Launcher
@@ -21,8 +20,5 @@ private:
   int m_speed = 12;
   float m_yaw = 0.f;
   float m_pitch = 30.f;
-
-  /*  0 = StandardProjectile
-      1 = HeavyProjectile */
-  int m_kind = 0;
+  ProjectileKind m_kind = ProjectileKind::kStandard;
 };
