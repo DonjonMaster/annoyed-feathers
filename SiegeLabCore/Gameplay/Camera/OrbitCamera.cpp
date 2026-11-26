@@ -21,9 +21,16 @@ void OrbitCamera::Update(const InputSnapshot& input, float dt)
     pitch -= input.mouseDelta.y;
   }
   
+  float y = yaw * DEG2RAD;
+  float p = pitch * DEG2RAD;
+  
   position = Position();
   Camera3D::target = target;
-  up = {0, 1, 0};
+  up = {
+    -std::sin(p) * std::sin(y),
+     std::cos(p),
+    -std::sin(p) * std::cos(y)
+};
   fovy = 45.0f;
   projection = CAMERA_PERSPECTIVE;
 }
