@@ -28,19 +28,29 @@ enum class InputButton
   kCount,
 };
 
+using InputBitset = std::bitset<static_cast<std::size_t>(InputButton::kCount)>;
+
 struct InputSnapshot
 {
   // Only for buttons inputs, not analog inputs
-  std::bitset<static_cast<std::size_t>(InputButton::kCount)> buttons;
+  InputBitset buttons;
+  InputBitset pressed_buttons;
 
   // For analog input, still use floats
-  Vector2 mouseDelta{};
-  float wheelDelta = 0.0f;
+  Vector2 mouse_delta {};
+  float wheel_delta = 0.0f;
 
-  bool isDown(InputButton button) const
+  bool IsDown(InputButton _button) const
   {
-    return buttons.test(static_cast<std::size_t>(button));
+    return buttons.test(static_cast<std::size_t>(_button));
   }
+  
+  bool IsPressed(InputButton _button) const
+  {
+    return pressed_buttons.test(static_cast<std::size_t>(_button));
+  }
+  
+  
 };
 
 class InputController
@@ -49,6 +59,8 @@ public:
   InputSnapshot Capture();
 
 private:
+  InputBitset m_previous_frame_buttons;
+  
   void CaptureCameraInputs(InputSnapshot& _input);
   void CaptureLauncherInputs(InputSnapshot& _input);
 };

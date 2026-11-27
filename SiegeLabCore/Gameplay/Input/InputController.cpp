@@ -3,15 +3,20 @@
 InputSnapshot InputController::Capture()
 {
   InputSnapshot input;
+  
   CaptureCameraInputs(input);
   CaptureLauncherInputs(input);
+  
+  // Based on bitsets, will set which input is/was pressed or not
+  input.pressed_buttons = input.buttons & ~m_previous_frame_buttons;
+  m_previous_frame_buttons = input.buttons;
 
-  if (input.isDown(InputButton::kOrbit))
+  if (input.IsDown(InputButton::kOrbit))
   {
-    input.mouseDelta = GetMouseDelta();
+    input.mouse_delta = GetMouseDelta();
   }
 
-  input.wheelDelta = GetMouseWheelMove();
+  input.wheel_delta = GetMouseWheelMove();
   return input;
 }
 

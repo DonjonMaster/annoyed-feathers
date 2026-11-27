@@ -1,22 +1,27 @@
 ﻿#include "Launcher.h"
 
 #include <algorithm>
+#include <iostream>
 
 #include <raymath.h>
 
 void Launcher::Aim(const InputSnapshot& _input)
 {
   int yaw_direction = 0;
-  if (_input.isDown(InputButton::kLauncherLeft)) yaw_direction -= 1;
-  if (_input.isDown(InputButton::kLauncherRight)) yaw_direction += 1;
+  if (_input.IsPressed(InputButton::kLauncherLeft))
+  {
+    std::printf("Launcher goes left");
+    yaw_direction -= 1;
+  }
+  if (_input.IsPressed(InputButton::kLauncherRight)) yaw_direction += 1;
 
   int pitch_direction = 0;
-  if (_input.isDown(InputButton::kLauncherUp)) pitch_direction += 1;
-  if (_input.isDown(InputButton::kLauncherDown)) pitch_direction -= 1;
+  if (_input.IsPressed(InputButton::kLauncherUp)) pitch_direction += 1;
+  if (_input.IsPressed(InputButton::kLauncherDown)) pitch_direction -= 1;
 
   int delta_speed = 0;
-  if (_input.isDown(InputButton::kLauncherSpeedUp)) delta_speed += 1;
-  if (_input.isDown(InputButton::kLauncherSpeedDown)) delta_speed -= 1;
+  if (_input.IsPressed(InputButton::kLauncherSpeedUp)) delta_speed += 1;
+  if (_input.IsPressed(InputButton::kLauncherSpeedDown)) delta_speed -= 1;
 
   // Apply new values if necessary
   if (yaw_direction != 0)
@@ -29,9 +34,9 @@ void Launcher::Aim(const InputSnapshot& _input)
     SetSpeed(m_speed + delta_speed);
 
   // Change kind if an input is pressed
-  if (_input.isDown(InputButton::kLauncherSelectKindStandard))
+  if (_input.IsPressed(InputButton::kLauncherSelectKindStandard))
     m_kind = ProjectileKind::kStandard;
-  if (_input.isDown(InputButton::kLauncherSelectKindHeavy))
+  if (_input.IsPressed(InputButton::kLauncherSelectKindHeavy))
     m_kind = ProjectileKind::kHeavy;
 }
 
