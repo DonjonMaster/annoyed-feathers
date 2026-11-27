@@ -17,8 +17,8 @@ void OrbitCamera::Update(const InputSnapshot& _input, float _dt)
 
   if (_input.IsDown(InputButton::kOrbit))
   {
-    m_yaw += _input.mouse_delta.x;
-    m_pitch -= _input.mouse_delta.y;
+    m_yaw -= _input.mouse_delta.x;
+    m_pitch += _input.mouse_delta.y;
   }
   
   UpdateCamera3D();
