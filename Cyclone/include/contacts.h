@@ -26,6 +26,8 @@
 #ifndef CYCLONE_CONTACTS_H
 #define CYCLONE_CONTACTS_H
 
+#include <functional>
+
 #include "body.h"
 
 namespace cyclone
@@ -67,6 +69,12 @@ namespace cyclone
     friend class ContactResolver;
 
   public:
+    
+    real getClosingSpeed() const
+    {
+      return std::max(static_cast<real>(0), -contactVelocity.x);
+    }
+    
     /**
      * Holds the bodies that are involved in the contact. The
      * second of these can be NULL, for contacts with the scenery.
@@ -299,6 +307,14 @@ namespace cyclone
     real positionEpsilon;
 
   public:
+    
+    using PreparedContactObserver = std::function<void(Contact* contacts, unsigned count)>;
+    
+    void setPreparedContactObserver(PreparedContactObserver observer)
+    {
+      preparedContactObserver_ = std::move(observer);
+    }
+    
     /**
      * Stores the number of velocity iterations used in the
      * last call to resolve contacts.
@@ -316,6 +332,8 @@ namespace cyclone
      * Keeps track of whether the internal settings are valid.
      */
     bool validSettings;
+    
+    PreparedContactObserver preparedContactObserver_;
 
   public:
     /**

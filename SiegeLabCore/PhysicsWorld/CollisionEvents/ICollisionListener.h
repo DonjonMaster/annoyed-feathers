@@ -1,8 +1,9 @@
 ﻿#pragma once
+#include "CollisionEvent.h"
 
 class ICollisionListener
 {
 public:
-  template <typename Events>
-  void OnCollision(Events);
+  virtual ~ICollisionListener() = default;
+  virtual void OnCollision(CollisionEvent event);
 };

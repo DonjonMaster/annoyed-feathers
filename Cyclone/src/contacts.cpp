@@ -557,6 +557,9 @@ void ContactResolver::resolveContacts(Contact* contacts,
 
   // Prepare the contacts for processing
   prepareContacts(contacts, numContacts, duration);
+  
+  if (preparedContactObserver_)
+    preparedContactObserver_(contacts, numContacts);
 
   // Resolve the interpenetration problems with the contacts.
   adjustPositions(contacts, numContacts, duration);
