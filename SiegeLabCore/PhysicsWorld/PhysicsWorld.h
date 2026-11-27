@@ -4,12 +4,16 @@
 #include <vector>
 
 #include "PhysicsRegistration.h"
+#include "CollisionEvents/CollisionEventDispatcher.h"
+#include "CollisionEvents/CollisionEventGenerator.h"
 #include "Cyclone/include/collide_fine.h"
 #include "SiegeLabCore/Gameplay/Scene/EntityId.h"
 
 class PhysicsWorld
 {
 public:
+  PhysicsWorld();
+  
   void RegisterSphere(EntityId id, cyclone::RigidBody& body,
                       cyclone::CollisionSphere& sphere);
   void RegisterBox(EntityId id, cyclone::RigidBody& body,
@@ -21,14 +25,25 @@ public:
   void Reset();
   
 private:
-  void GameEntitiesCollisions(cyclone::CollisionData data);
-  void PlanesCollisions(cyclone::CollisionData data);
+  void GameEntitiesCollisions(cyclone::CollisionData& data, bool& coverageComplete);
+  void PlanesCollisions(cyclone::CollisionData& data, bool& coverageComplete);
   void AfterContact();
   void BeforeContact();
   void Integrate(float dt);
   
+  void CopyPreparedContacts(const cyclone::Contact* contacts, unsigned count);
+  
+  bool TryGetEndpoint(cyclone::RigidBody* body, 
+    CollisionEndpoint& result) const;
+  
   std::vector<PhysicsRegistration> registrations_;
-  std::vector<cyclone::CollisionPlane*> planes_;
+  std::vector<cyclone::CollisionPlane> planes_;
+  
+  // Contacts
+  std::vector<ContactSnapshot> snapshots_;
+  CollisionEventGenerator eventGenerator_;
+  CollisionEventDispatcher eventDispatcher_;
+
   
   static const unsigned MaxContacts = 1024;
   
