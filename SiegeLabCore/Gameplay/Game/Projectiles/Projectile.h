@@ -4,6 +4,8 @@
 
 class Projectile : public GameEntity
 {
+  friend class TrajectoryPredictor;
+  
 public:
   Projectile();
   

@@ -5,9 +5,10 @@
 class Block : public GameEntity
 {
 public:
+  Block(cyclone::Vector3 _pos);
   void RegisterPhysics(PhysicsWorld& world) override;
   void Draw() override;
 
-private:
+protected:
   cyclone::CollisionBox box_;
 };

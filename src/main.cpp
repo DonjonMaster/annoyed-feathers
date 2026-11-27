@@ -14,14 +14,20 @@ by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit h
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 #include "SiegeLabCore/Gameplay/Camera/CameraManager.h"
 #include "SiegeLabCore/Gameplay/Game/GameController.h"
+#include "SiegeLabCore/Gameplay/Game/Blocks/Block.h"
+#include "SiegeLabCore/Gameplay/Game/Blocks/CubeBlock.h"
 #include "SiegeLabCore/Gameplay/Launcher/Launcher.h"
 #include "SiegeLabCore/Gameplay/Launcher/TrajectoryPredictor.h"
+#include "SiegeLabCore/Gameplay/Scene/SceneObjects.h"
 
 int main()
 {
+  SceneObjects* scene_objects = SceneObjects::GetInstance();
+  scene_objects->CreateEntity<CubeBlock>(cyclone::Vector3(4, 0, 0));
+  
   GameController game_controller;
   game_controller.Run();
-
+  
   // Tell the window to use vsync and work on high DPI displays
   SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
 
@@ -36,8 +42,10 @@ int main()
 
   Launcher launcher;
   ShotSettings shot_settings = launcher.GetShotSettings();
+  
   TrajectoryPredictor trajectory_predictor;
   TrajectoryPrediction prediction = trajectory_predictor.PredictUntilFirstContact(shot_settings);
+  int prediction_index = 0;
   
   CameraManager camera_manager;
   OrbitCamera camera;
@@ -73,14 +81,26 @@ int main()
     
     DrawCube({2, 1, 1}, 2, 2, 2, WHITE);
 
-    for (int i = 0; i < prediction.positions.size() - 1; ++i)
+    if (prediction.positions.size() > 0)
     {
-      cyclone::Vector3 a = prediction.positions[i];
-      cyclone::Vector3 b = prediction.positions[i + 1];
-      Vector3 c(a.x, a.y, a.z);
-      Vector3 d(b.x, b.y, b.z);
-      DrawLine3D(c, d, RED);
+      for (int i = 0; i < prediction.positions.size() - 1; ++i)
+      {
+        cyclone::Vector3 a = prediction.positions[i];
+        cyclone::Vector3 b = prediction.positions[i + 1];
+        Vector3 c(a.x, a.y, a.z);
+        Vector3 d(b.x, b.y, b.z);
+        DrawLine3D(c, d, RED);
+      }
+    
+      cyclone::Vector3 p = prediction.positions[prediction_index];
+      DrawSphere(Vector3(p.x, p.y, p.z), 0.15, RED);
+      prediction_index = (++prediction_index) % prediction.positions.size();
     }
+    
+    auto game_entities = scene_objects->GetGameEntities();
+    for (auto& game_entity : game_entities)
+      if (game_entity)
+        game_entity->Draw();
     
     EndMode3D();
     

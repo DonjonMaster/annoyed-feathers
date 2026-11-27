@@ -20,6 +20,9 @@ public:
   // Get an object from requested ID
   T* Get(EntityId id);
 
+  // Get all objects in the pool
+  std::vector<T*>& GetObjects() { return m_objects; }
+  
   // Destroy an object from requested ID
   void Destroy(EntityId id);
 

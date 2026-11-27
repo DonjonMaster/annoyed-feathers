@@ -17,8 +17,9 @@ public:
   void RegisterPlane(cyclone::CollisionPlane plane);
   void UnregisterObject(EntityId id);
   cyclone::CollisionData createCollisionData();
-  void Step(const float dt);
+  void Step(float dt, bool _integrates = true);
   void Reset();
+  
 private:
   void GameEntitiesCollisions(cyclone::CollisionData data);
   void PlanesCollisions(cyclone::CollisionData data);
@@ -32,5 +33,5 @@ private:
   static const unsigned MaxContacts = 1024;
   
   std::array<cyclone::Contact, MaxContacts> contactBuffer_{};
-  cyclone::ContactResolver resolver_;
+  cyclone::ContactResolver resolver_ = cyclone::ContactResolver(1);
 };

@@ -39,13 +39,16 @@ void PhysicsWorld::GameEntitiesCollisions(cyclone::CollisionData data)
       
       const bool aFixed = a.body->getInverseMass() <= 0;
       const bool bFixed = b.body->getInverseMass() <= 0;
+      
       if (aFixed && bFixed)
         continue;
+      
       if (
           !(a.collision_sphere || a.collision_box) ||
           !(b.collision_sphere || b.collision_box)
       )
         continue;
+      
       if (a.collision_sphere && b.collision_sphere)
       {
           cyclone::CollisionDetector::sphereAndSphere(
@@ -137,13 +140,14 @@ cyclone::CollisionData PhysicsWorld::createCollisionData()
   return data;
 }
 
-void PhysicsWorld::Step(const float dt)
+void PhysicsWorld::Step(const float dt, const bool _integrates)
 {
   if (dt <= 0)
     return;
 
   // Integrate only movable bodies
-  Integrate(dt);
+  if (_integrates)
+    Integrate(dt);
 
   // Refresh collider transforms before detection
   BeforeContact();

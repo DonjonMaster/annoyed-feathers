@@ -6,15 +6,15 @@
 
 TEST(Entities, FactoryCreatesDerivedTypes)
 {
-  SceneObjects scene_objects;
+  SceneObjects* scene_objects = SceneObjects::GetInstance();
   
-  EntityId standard_id = scene_objects.CreateEntity<StandardProjectile>();
-  EntityId heavy_id = scene_objects.CreateEntity<HeavyProjectile>();
+  EntityId standard_id = scene_objects->CreateEntity<StandardProjectile>();
+  EntityId heavy_id = scene_objects->CreateEntity<HeavyProjectile>();
   
   EXPECT_TRUE(standard_id.IsValid());
   EXPECT_TRUE(heavy_id.IsValid());
-  EXPECT_TRUE(scene_objects.Get(standard_id) != nullptr);
-  EXPECT_TRUE(scene_objects.Get(heavy_id) != nullptr);
+  EXPECT_TRUE(scene_objects->Get(standard_id) != nullptr);
+  EXPECT_TRUE(scene_objects->Get(heavy_id) != nullptr);
 }
 
 TEST(Entities, VirtualDrawDispatchWithoutRTTI)

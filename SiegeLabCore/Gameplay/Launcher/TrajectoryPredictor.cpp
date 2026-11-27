@@ -6,6 +6,7 @@
 #include "SiegeLabCore/Gameplay/Game/Projectiles/HeavyProjectile.h"
 #include "SiegeLabCore/Gameplay/Game/Projectiles/Projectile.h"
 #include "SiegeLabCore/Gameplay/Game/Projectiles/StandardProjectile.h"
+#include "SiegeLabCore/Gameplay/Scene/SceneObjects.h"
 
 TrajectoryPrediction TrajectoryPredictor::PredictUntilFirstContact(
   const ShotSettings& _shot_settings)
@@ -22,17 +23,25 @@ TrajectoryPrediction TrajectoryPredictor::PredictUntilFirstContact(
   m_prediction.end_with_collision = false;
   
   // Assign a projectile of the same kind for the `predictor_projectile`
+  EntityId id;
+  id.slot = 999;
+  
+  PhysicsWorld& physics_world = SceneObjects::GetInstance()->GetPhysicsWorld();
   Projectile* predictor_projectile = MakePredictorProjectile(_shot_settings);
   cyclone::RigidBody& predictor_body = predictor_projectile->GetBody();
   
+  physics_world.RegisterSphere(id, 
+    predictor_projectile->body_, predictor_projectile->sphere_);
+  
   for (int i = 0; i < MAX_STEPS; ++i)
   {
-    predictor_body.addForce(cyclone::Vector3(0, -9.81, 0));
     predictor_body.integrate(STEP_DURATION);
+    predictor_body.addForce(cyclone::Vector3(0, -9.81, 0));
+    physics_world.Step(STEP_DURATION, true);
     m_prediction.positions.emplace_back(predictor_body.getPosition());
-    
-    // TODO: Check if projectile is colliding with something, break when it does
   }
+  
+  physics_world.UnregisterObject(id);
   
   delete predictor_projectile;
   return m_prediction;
@@ -59,11 +68,11 @@ Projectile* TrajectoryPredictor::MakePredictorProjectile(const ShotSettings& _sh
   }
   
   predictor_projectile->ConfigurePhysics();
+  cyclone::RigidBody& predictor_body = predictor_projectile->GetBody();
   
-  predictor_projectile->GetBody().setAwake(true);
-  predictor_projectile->GetBody().setPosition(_shot_settings.origin);
-  predictor_projectile->GetBody().setVelocity(
-                    _shot_settings.direction * _shot_settings.speed);
+  predictor_body.setAwake(true);
+  predictor_body.setPosition(_shot_settings.origin);
+  predictor_body.setVelocity(_shot_settings.direction * _shot_settings.speed);
   
   return predictor_projectile;
 }
