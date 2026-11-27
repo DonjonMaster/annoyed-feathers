@@ -46,4 +46,5 @@ private:
   
   // Launcher goes pew!
   Launcher m_launcher;
+  ShotSettings m_shot_settings;
 };
