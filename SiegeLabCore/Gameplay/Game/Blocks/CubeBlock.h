@@ -4,6 +4,6 @@
 class CubeBlock : public Block
 {
 public:
-  CubeBlock(cyclone::Vector3 _pos) : Block(_pos) {}
+  CubeBlock(float _half_size, cyclone::Vector3 _pos);
   void ConfigurePhysics() override;
 };

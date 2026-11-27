@@ -69,11 +69,11 @@ TEST(Launcher, AimIsIndependantFromCamera)
   launcher.SetYaw(20.f);
   launcher.SetPitch(30.f);
   
-  camera.yaw = 0.f;
+  camera.m_yaw = 0.f;
   ExpectVectorNear(launcher.GetShotSettings().direction,
       { 0.8138f, 0.5f, 0.2962f }, 1e-3f);
   
-  camera.yaw = 120.f;
+  camera.m_yaw = 120.f;
   ExpectVectorNear(launcher.GetShotSettings().direction,
       { 0.8138f, 0.5f, 0.2962f }, 1e-3f);
 }

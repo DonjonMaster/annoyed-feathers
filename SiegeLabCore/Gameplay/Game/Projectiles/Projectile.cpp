@@ -6,12 +6,12 @@ Projectile::Projectile()
   sphere_.offset = cyclone::Matrix4();
 }
 
-void Projectile::Fire(ShotSettings settings)
+void Projectile::Fire(ShotSettings _settings)
 {
-  // TODO : Define the new body_ parameters based on settings
+  // TODO : Define the new body parameters based on settings
 }
 
-void Projectile::RegisterPhysics(PhysicsWorld& world)
+void Projectile::RegisterPhysics(PhysicsWorld& _world)
 {
-  world.RegisterSphere(id_, body_, sphere_);
+  _world.RegisterSphere(m_id_, m_body_, sphere_);
 }

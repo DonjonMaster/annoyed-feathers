@@ -97,27 +97,27 @@ TEST(Camera, TargetAndRadiusRemainStable)
   OrbitCamera camera;
   InputSnapshot noInput{};
   
-  camera.target = {2.0f, 1.0f, 0.0f};
-  camera.radius = 10.0f;
-  camera.yaw = 0.0f;
-  camera.pitch = 20.0f;
+  camera.m_target = {2.0f, 1.0f, 0.0f};
+  camera.m_radius = 10.0f;
+  camera.m_yaw = 0.0f;
+  camera.m_pitch = 20.0f;
   
   camera.Update(noInput, 0);
-  const Vector3 initialPosition = camera.Position();
+  const Vector3 initialPosition = camera.GetPosition();
   
   ExpectVectorNear(initialPosition, {2.0f, 4.4202f, 9.3969f}, 1e-3f);
-  ExpectVectorNear(camera.target, {2.0f, 1.0f, 0.0f}, 1e-3f);
-  EXPECT_NEAR(Distance(initialPosition, camera.target), 10.0f, 1e-3f);
+  ExpectVectorNear(camera.m_target, {2.0f, 1.0f, 0.0f}, 1e-3f);
+  EXPECT_NEAR(Distance(initialPosition, camera.m_target), 10.0f, 1e-3f);
   
-  camera.yaw = 90.0f;
-  camera.pitch = 30.0f;
+  camera.m_yaw = 90.0f;
+  camera.m_pitch = 30.0f;
 
   camera.Update(noInput, 0.0f);
-  const Vector3 finalPosition = camera.Position();
+  const Vector3 finalPosition = camera.GetPosition();
 
   ExpectVectorNear(finalPosition, {10.6603f, 6.0f, 0.0f}, 1e-3f);
-  ExpectVectorNear(camera.target, {2.0f, 1.0f, 0.0f}, 1e-3f);
-  EXPECT_NEAR(Distance(finalPosition, camera.target), 10.0f, 1e-3f);
+  ExpectVectorNear(camera.m_target, {2.0f, 1.0f, 0.0f}, 1e-3f);
+  EXPECT_NEAR(Distance(finalPosition, camera.m_target), 10.0f, 1e-3f);
 }
 
 TEST(Camera, PitchAndZoomAreClamped)
@@ -129,17 +129,17 @@ TEST(Camera, FullTurnReturnsToSamePose)
   OrbitCamera camera;
   InputSnapshot noInput{};
   
-  camera.target = {0.0f, 0.0f, 0.0f};
-  camera.radius = 10.0f;
-  camera.pitch = 20.0f;
-  camera.yaw = 30.0f;
+  camera.m_target = {0.0f, 0.0f, 0.0f};
+  camera.m_radius = 10.0f;
+  camera.m_pitch = 20.0f;
+  camera.m_yaw = 30.0f;
   
   camera.Update(noInput, 0.0f);
-  const Vector3 before = camera.Position();
+  const Vector3 before = camera.GetPosition();
 
-  camera.yaw = 390.0f;
+  camera.m_yaw = 390.0f;
   camera.Update(noInput, 0.0f);
-  const Vector3 after = camera.Position();
+  const Vector3 after = camera.GetPosition();
 
   ExpectVectorNear(before, {4.6985f, 3.4202f, 8.1380f}, 1e-3f);
   EXPECT_NEAR(Distance(before, after), 0.0f, 1e-4f);

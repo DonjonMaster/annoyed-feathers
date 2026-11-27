@@ -46,7 +46,7 @@ struct InputSnapshot
 class InputController
 {
 public:
-  InputSnapshot capture();
+  InputSnapshot Capture();
 
 private:
   void CaptureCameraInputs(InputSnapshot& _input);

@@ -1,7 +1,5 @@
 ﻿#include "SceneObjects.h"
 
-SceneObjects* SceneObjects::m_instance = nullptr;
-
 GameEntity* SceneObjects::Get(const EntityId id)
 {
   return pool_.Get(id);

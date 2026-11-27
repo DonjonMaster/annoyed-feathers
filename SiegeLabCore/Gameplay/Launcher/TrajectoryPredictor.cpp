@@ -1,8 +1,9 @@
 ﻿#include "TrajectoryPredictor.h"
 
 #include <iostream>
-#include <raymath.h>
+#include <raylib.h>
 
+#include "SiegeLabCore/Gameplay/Game/GameController.h"
 #include "SiegeLabCore/Gameplay/Game/Projectiles/HeavyProjectile.h"
 #include "SiegeLabCore/Gameplay/Game/Projectiles/Projectile.h"
 #include "SiegeLabCore/Gameplay/Game/Projectiles/StandardProjectile.h"
@@ -26,12 +27,12 @@ TrajectoryPrediction TrajectoryPredictor::PredictUntilFirstContact(
   EntityId id;
   id.slot = 999;
   
-  PhysicsWorld& physics_world = SceneObjects::GetInstance()->GetPhysicsWorld();
+  PhysicsWorld& physics_world = GameController::GetInstance()->GetPhysicsWorld();
   Projectile* predictor_projectile = MakePredictorProjectile(_shot_settings);
   cyclone::RigidBody& predictor_body = predictor_projectile->GetBody();
   
   physics_world.RegisterSphere(id, 
-    predictor_projectile->body_, predictor_projectile->sphere_);
+    predictor_projectile->m_body_, predictor_projectile->sphere_);
   
   for (int i = 0; i < MAX_STEPS; ++i)
   {

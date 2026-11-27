@@ -5,10 +5,10 @@
 class Block : public GameEntity
 {
 public:
-  Block(cyclone::Vector3 _pos);
-  void RegisterPhysics(PhysicsWorld& world) override;
+  Block(const cyclone::Vector3& _pos);
+  void RegisterPhysics(PhysicsWorld& _world) override;
   void Draw() override;
 
 protected:
-  cyclone::CollisionBox box_;
+  cyclone::CollisionBox m_box_;
 };

@@ -1,6 +1,6 @@
 ﻿#include "InputController.h"
 
-InputSnapshot InputController::capture()
+InputSnapshot InputController::Capture()
 {
   InputSnapshot input;
   CaptureCameraInputs(input);

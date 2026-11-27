@@ -8,5 +8,5 @@ public:
   void Draw() override;
 
   // Threshold of damage caused by hit for cage to be destroyed
-  cyclone::real break_threshold;
+  cyclone::real m_break_threshold;
 };

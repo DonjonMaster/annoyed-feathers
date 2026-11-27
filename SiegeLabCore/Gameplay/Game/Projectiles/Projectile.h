@@ -9,8 +9,8 @@ class Projectile : public GameEntity
 public:
   Projectile();
   
-  void Fire(ShotSettings settings);
-  void RegisterPhysics(PhysicsWorld& world) override;
+  void Fire(ShotSettings _settings);
+  void RegisterPhysics(PhysicsWorld& _world) override;
   void Draw() override {}
 
 protected:

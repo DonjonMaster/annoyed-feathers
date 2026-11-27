@@ -1,18 +1,21 @@
 ﻿#pragma once
 #include "ICameraController.h"
-#include "SiegeLabCore/Gameplay/Game/GameController.h"
 
 class CameraManager
 {
 public:
-  void SetActive(ICameraController *controller)
+  // Set a camera controller as the active camera of the manager
+  void SetActive(ICameraController *_controller)
   {
-    controller_ = controller;
+    m_controller = _controller;
   }
-  ICameraController& GetCamera()
+  
+  // Get active camera controller of the manager
+  ICameraController& GetCamera() const
   {
-    return *controller_;
+    return *m_controller;
   }
+  
 private:
-  ICameraController* controller_;
+  ICameraController* m_controller = nullptr;
 };
